@@ -27,6 +27,8 @@ $(document).ready(function() {
 
 // 현재 카테고리 선택
 function setCollection(coll) {
+	// 이전결재문서, 파일 탭은 사용자의 권한에 따라 보일 수도 안보일 수도 있음
+	// 총 탭 10개
 	// 컬렉션 버튼 이미지 초기화
 	for (i = 1;i < 9 ;i++) {
 		$('#collection0' + i).parent().attr('class','menu_btn');
@@ -95,24 +97,31 @@ function search() {
 	var printCnt = 10; // 출력 데이터 수 
 	
 	var coll = $("#collection").val(); // 메뉴
+	console.log('통합 coll 확인 : '+ coll);
 	
 	if(coll == "01") { // 통합검색 
 		resultAll(keyword, currentPage, 3);
 		
 	} else if(coll == "02") { // 시큐어디스크 
 		resultSecuredisk(keyword, currentPage, printCnt);
-		
+
 	} else if(coll == "03") { // 전자결재 
+		resultApp(keyword, currentPage, printCnt);
 	
 	} else if(coll == "04") { // ISO
+		resultIso(keyword, currentPage, printCnt);
 	
-	} else if(coll == "05") { // 분임조 
-	
-	} else if(coll == "06") { // 제안 
+	} else if(coll == "05") { // 분임조
+		resultGrp(keyword, currentPage, printCnt);
 		
-	} else if(coll == "07") { // 이전전자결재 
+	} else if(coll == "06") { // 제안
+		resultSug(keyword, currentPage, printCnt);
+		
+	} else if(coll == "07") { // 이전전자결재
+		resultAppoId(keyword, currentPage, printCnt);
 	
-	} else if(coll == "08") { // 파일서버 
-	
+	} else if(coll == "08") { // 파일서버
+		resultFile(keyword, currentPage, printCnt);
+		
 	}
 }
