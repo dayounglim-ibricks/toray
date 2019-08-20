@@ -1,19 +1,35 @@
-function resultAll(keyword, currentPage, rowCnt) {	//현재페이지, 출력 데이터 수
-	var index = "all";
+// 공통 - 검색조건 
+function getTerms(index, keyword, from, size){
+	
+	let terms = {
+			index : index,
+			keyword : keyword,
+			from : from,
+			size : size,
+			sort : $('#sort').val(),
+			startDate : $('#startDate').val(),
+			endDate : $('#endDate').val(),
+			field : $('#field').val(),
+			file : $('#file').val()
+	}
+	console.log('post request body:',JSON.stringify(terms));
+	return terms;
+}
 
+   
+function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 수
+	var index = "all";
+	
+	let data = getTerms(index, keyword, from, size);	
+	
 	$.ajax({
 		  url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
 		  async: true, // false 일 경우 동기 요청으로 변경
 		  type: 'POST', // GET, PUT
 		  dataType: "json",
-		  data: { 
-				"index" : index,
-				"keyword" : keyword,
-				"from" : currentPage,
-				"size" : rowCnt
-		  	},
+		  data: data,
 		  success: function(result) {
-			  console.log('성공 : ' + JSON.stringify(result));
+			  // console.log('성공 : ' + JSON.stringify(result));
 			  $('.content_div.result .doc_div').remove();
 			  
 			  // TODO: multi-search 순서 상관없음. object의 index 확인하여 수정 필요 
@@ -131,14 +147,9 @@ function resultAll(keyword, currentPage, rowCnt) {	//현재페이지, 출력 데
 }
 
 // 시큐어디스크
-function resultSecuredisk(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
+function resultSecuredisk(keyword, from, size) {   //현재페이지, 출력 데이터 수
    var index = "securedisk";
-   var data = {
-	   "index" : index,
-       "keyword" : keyword,
-       "from" : currentPage,
-       "size" : rowCnt
-   };
+   let data = getTerms(index, keyword, from, size);	
    
    var result = JSON.parse(ajaxJson(data));
 
@@ -198,8 +209,8 @@ function resultSecuredisk(keyword, currentPage, rowCnt) {   //현재페이지, �
         data: { 
             "index" : index,
             "keyword" : keyword,
-            "from" : currentPage,
-            "size" : rowCnt
+            "from" : from,
+            "size" : size
            },
         success: function(result) {
 
@@ -258,20 +269,16 @@ function resultSecuredisk(keyword, currentPage, rowCnt) {   //현재페이지, �
 }
 
 // 전자결재
-function resultApp(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
+function resultApp(keyword, from, size) {   //현재페이지, 출력 데이터 수
    var index = "app";
+   let data = getTerms(index, keyword, from, size);	
    
    $.ajax({
         url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
         async: true, // false 일 경우 동기 요청으로 변경
         type: 'POST', // GET, PUT
         dataType: "json",
-        data: { 
-            "index" : index,
-            "keyword" : keyword,
-            "from" : currentPage,
-            "size" : rowCnt
-           },
+        data: data,
         success: function(result) {
         	
            $('.content_div.result .doc_div').remove();
@@ -325,20 +332,17 @@ function resultApp(keyword, currentPage, rowCnt) {   //현재페이지, 출력 �
 }
 
 // 이전결재문서
-function resultAppoId(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
+function resultAppoId(keyword, from, size) {   //현재페이지, 출력 데이터 수
    var index = "appold";
+   let data = getTerms(index, keyword, from, size);	
+   
    console.log('이전결재문서'); // TODO: ajax 실행 안됨
    $.ajax({
         url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
         async: true, // false 일 경우 동기 요청으로 변경
         type: 'POST', // GET, PUT
         dataType: "json",
-        data: { 
-            "index" : index,
-            "keyword" : keyword,
-            "from" : currentPage,
-            "size" : rowCnt
-           },
+        data: data,
         success: function(result) {
         	
            $('.content_div.result .doc_div').remove();
@@ -392,20 +396,16 @@ function resultAppoId(keyword, currentPage, rowCnt) {   //현재페이지, 출�
 }
 
 // ISO
-function resultIso(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
+function resultIso(keyword, from, size) {   //현재페이지, 출력 데이터 수
    var index = "iso";
+   let data = getTerms(index, keyword, from, size);	
    
    $.ajax({
         url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
         async: true, // false 일 경우 동기 요청으로 변경
         type: 'POST', // GET, PUT
         dataType: "json",
-        data: { 
-            "index" : index,
-            "keyword" : keyword,
-            "from" : currentPage,
-            "size" : rowCnt
-           },
+        data: data,
         success: function(result) {
         	
            $('.content_div.result .doc_div').remove();
@@ -461,20 +461,16 @@ function resultIso(keyword, currentPage, rowCnt) {   //현재페이지, 출력 �
 }
 
 // 분임조(grp)
-function resultGrp(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
+function resultGrp(keyword, from, size) {   //현재페이지, 출력 데이터 수
    var index = "grp";
+   let data = getTerms(index, keyword, from, size);	
    
    $.ajax({
         url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
         async: true, // false 일 경우 동기 요청으로 변경
         type: 'POST', // GET, PUT
         dataType: "json",
-        data: { 
-            "index" : index,
-            "keyword" : keyword,
-            "from" : currentPage,
-            "size" : rowCnt
-           },
+        data: data,
         success: function(result) {
         	
            $('.content_div.result .doc_div').remove();
@@ -531,20 +527,16 @@ function resultGrp(keyword, currentPage, rowCnt) {   //현재페이지, 출력 �
 }
 
 // 제안(sug)
-function resultSug(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
+function resultSug(keyword, from, size) {   //현재페이지, 출력 데이터 수
    var index = "sug";
+   let data = getTerms(index, keyword, from, size);	
    
    $.ajax({
         url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
         async: true, // false 일 경우 동기 요청으로 변경
         type: 'POST', // GET, PUT
         dataType: "json",
-        data: { 
-            "index" : index,
-            "keyword" : keyword,
-            "from" : currentPage,
-            "size" : rowCnt
-           },
+        data: data,
         success: function(result) {
         	
            $('.content_div.result .doc_div').remove();
@@ -599,20 +591,17 @@ function resultSug(keyword, currentPage, rowCnt) {   //현재페이지, 출력 �
 }
 
 // 파일
-function resultFile(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
+function resultFile(keyword, from, size) {   //현재페이지, 출력 데이터 수
    var index = "file";
+   let data = getTerms(index, keyword, from, size);	
+   
    console.log('파일'); // TODO: ajax 실행 안됨
    $.ajax({
         url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
         async: true, // false 일 경우 동기 요청으로 변경
         type: 'POST', // GET, PUT
         dataType: "json",
-        data: { 
-            "index" : index,
-            "keyword" : keyword,
-            "from" : currentPage,
-            "size" : rowCnt
-           },
+        data: data,
         success: function(result) {
         	
            $('.content_div.result .doc_div').remove();

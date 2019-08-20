@@ -36,12 +36,10 @@ $(document).ready(function() {
 <body>
 <div class='v_container'>
 
-<!-- dy -->
-	<input type="hidden" id="collection" name="collection" value="01">
-	<input type="hidden" id="sort" value="01">
-	<input type="hidden" id="field" value="01">
-	<input type="hidden" id="file" value="all">
-<!--/ dy -->
+<input type="hidden" id="collection" name="collection" value="01">
+<input type="hidden" id="sort" value="01">
+<input type="hidden" id="field" value="01">
+<input type="hidden" id="file" value="all">
 
   <div class="v_head">
     <div class="head_middle">
@@ -88,7 +86,6 @@ $(document).ready(function() {
   </div>
   <div class="v_menu">
     <div class="menu_box">
-      <!-- dy -->
       <div class="selected_menu_btn"><a href="#" name ="collection01" id="collection01" onClick="javascript:setCollection('01');" >통합검색</a></div>
       <div class="menu_btn"><a href="#" name ="collection02" id="collection02" onClick="javascript:setCollection('02');" >시큐어디스크</a></div>
       <div class="menu_btn"><a href="#" name ="collection03" id="collection03" onClick="javascript:setCollection('03');" >전자결재</a></div>
@@ -97,10 +94,11 @@ $(document).ready(function() {
       <div class="menu_btn"><a href="#" name ="collection05" id="collection05" onClick="javascript:setCollection('05');" >분임조</a></div>
       <div class="menu_btn"><a href="#" name ="collection06" id="collection06" onClick="javascript:setCollection('06');" >제안</a></div>
       <div class="menu_btn"><a href="#" name ="collection06" id="collection08" onClick="javascript:setCollection('08');" >파일</a></div>
+      <!-- 
       <div class="menu_btn"><a href="#" name ="collection07" id="collection09" onClick="javascript:setCollection('09');" >메일</a></div>
       <div class="menu_btn"><a href="#" name ="collection08" id="collection10" onClick="javascript:setCollection('10');" >팀사이트</a></div>
-      <!-- / dy -->
-      
+       -->
+
       <div class="popular_prev_div">
         <span class="popular_prev_icon">1</span>
         <span class="popular_prev_text">폴리에스터

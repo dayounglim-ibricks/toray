@@ -148,29 +148,35 @@ function search() {
 	// IE keyword 한글 깨짐 문제로 강제 인코딩 처리
 	// keyword = encodeURIComponent(keyword);
 	
-	var currentPage = 0; // 현재 페이지 
-	var printCnt = 10; // 출력 데이터 수 
+	var from = 0; // 현재 페이지 
+	var size = 10; // 출력 데이터 수 
 	
 	var coll = $('#collection').val(); // 메뉴
 	
 	if(coll == '01') { // 통합검색 
-		resultAll(keyword, currentPage, 3);
+		resultAll(keyword, from, 3);
 		
 	} else if(coll == '02') { // 시큐어디스크 
-		resultSecuredisk(keyword, currentPage, printCnt);
+		resultSecuredisk(keyword, from, size);
 		
 	} else if(coll == '03') { // 전자결재 
-	
-	} else if(coll == '04') { // ISO
-	
-	} else if(coll == '05') { // 분임조 
-	
-	} else if(coll == '06') { // 제안 
+		resultApp(keyword, from, size);
 		
-	} else if(coll == '07') { // 이전전자결재 
-	
+	} else if(coll == '04') { // ISO
+		resultIso(keyword, from, size);
+		
+	} else if(coll == '05') { // 분임조 
+		resultGrp(keyword, from, size);
+		
+	} else if(coll == '06') { // 제안 
+		resultSug(keyword, from, size);
+		
+	} else if(coll == '07') { // 이전결재문서  
+		resultAppoId(keyword, from, size);
+		
 	} else if(coll == '08') { // 파일서버 
-	
+		resultFile(keyword, from, size);
+		
 	}
 }
 
