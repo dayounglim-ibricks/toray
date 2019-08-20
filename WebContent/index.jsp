@@ -18,8 +18,7 @@
   <script type="text/javascript" src="./js/ref/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="./js/ref/moment-2.13.min.js"></script>
   <script type="text/javascript" src="./js/common.js"></script>
-  <script type="text/javascript" src="./js/result/resultAll.js"></script>
-  <script type="text/javascript" src="./js/result/resultSecuredisk.js"></script>
+  <script type="text/javascript" src="./js/result/results.js"></script>
   <script src="./datepicker/jquery-1.12.4.js"></script>
   <script src="./datepicker/jquery-ui.js"></script>
   <link rel="stylesheet" href="./datepicker/jquery-ui.css">
@@ -93,11 +92,13 @@ $(document).ready(function() {
       <div class="selected_menu_btn"><a href="#" name ="collection01" id="collection01" onClick="javascript:setCollection('01');" >통합검색</a></div>
       <div class="menu_btn"><a href="#" name ="collection02" id="collection02" onClick="javascript:setCollection('02');" >시큐어디스크</a></div>
       <div class="menu_btn"><a href="#" name ="collection03" id="collection03" onClick="javascript:setCollection('03');" >전자결재</a></div>
+      <div class="menu_btn"><a href="#" name ="collection03" id="collection07" onClick="javascript:setCollection('07');" >이전결재문서</a></div>
       <div class="menu_btn"><a href="#" name ="collection04" id="collection04" onClick="javascript:setCollection('04');" >ISO</a></div>
       <div class="menu_btn"><a href="#" name ="collection05" id="collection05" onClick="javascript:setCollection('05');" >분임조</a></div>
       <div class="menu_btn"><a href="#" name ="collection06" id="collection06" onClick="javascript:setCollection('06');" >제안</a></div>
-      <div class="menu_btn"><a href="#" name ="collection07" id="collection07" onClick="javascript:setCollection('07');" >메일</a></div>
-      <div class="menu_btn"><a href="#" name ="collection08" id="collection08" onClick="javascript:setCollection('08');" >팀사이트</a></div>
+      <div class="menu_btn"><a href="#" name ="collection06" id="collection08" onClick="javascript:setCollection('08');" >파일</a></div>
+      <div class="menu_btn"><a href="#" name ="collection07" id="collection09" onClick="javascript:setCollection('09');" >메일</a></div>
+      <div class="menu_btn"><a href="#" name ="collection08" id="collection10" onClick="javascript:setCollection('10');" >팀사이트</a></div>
       <!-- / dy -->
       
       <div class="popular_prev_div">

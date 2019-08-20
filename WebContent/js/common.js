@@ -82,6 +82,8 @@ $(document).ready(function() {
 
 // 현재 카테고리 선택
 function setCollection(coll) {
+	// 이전결재문서, 파일 탭은 사용자의 권한에 따라 보일 수도 안보일 수도 있음
+	// 총 탭 10개
 	// 컬렉션 버튼 이미지 초기화
 	for (i = 1;i < 9 ;i++) {
 		$('#collection0' + i).parent().attr('class','menu_btn');
