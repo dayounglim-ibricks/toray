@@ -1,5 +1,12 @@
 function resultSecuredisk(keyword, currentPage, rowCnt) {   //현재페이지, 출력 데이터 수
    var index = "securedisk";
+   var sort = $('#sort').val();
+   var field = $('#field').val();
+   var file = $('#file').val();
+   var startDate = $('#startDate').val();
+   var endDate = $('#endDate').val();
+   //console.log("secure > sort /field /file/ startDate/ endDate |||",sort,field,file,startDate,endDate);
+
    
    $.ajax({
         url: "http://192.168.0.3:19200/gateway/search", // 요청 할 주소
@@ -10,7 +17,12 @@ function resultSecuredisk(keyword, currentPage, rowCnt) {   //현재페이지, �
             "index" : index,
             "keyword" : keyword,
             "from" : currentPage,
-            "size" : rowCnt
+            "size" : rowCnt,
+			"sort" : sort,
+			"startDate" : startDate,
+			"endDate" : endDate,
+			"field" : field,
+			"file" : file
            },
         success: function(result) {
 

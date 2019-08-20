@@ -20,6 +20,9 @@
   <script type="text/javascript" src="./js/common.js"></script>
   <script type="text/javascript" src="./js/result/resultAll.js"></script>
   <script type="text/javascript" src="./js/result/resultSecuredisk.js"></script>
+  <script src="./datepicker/jquery-1.12.4.js"></script>
+  <script src="./datepicker/jquery-ui.js"></script>
+  <link rel="stylesheet" href="./datepicker/jquery-ui.css">
 </head>
 <script>
 $(document).ready(function() {
@@ -36,6 +39,9 @@ $(document).ready(function() {
 
 <!-- dy -->
 	<input type="hidden" id="collection" name="collection" value="01">
+	<input type="hidden" id="sort" value="01">
+	<input type="hidden" id="field" value="01">
+	<input type="hidden" id="file" value="all">
 <!--/ dy -->
 
   <div class="v_head">
@@ -406,8 +412,8 @@ $(document).ready(function() {
           <div class="ss_tit">결과정렬</div>
           <div class='cont'>
             <ul>
-              <li>정확도순</li>
-              <li class="sel">최신순</li>
+              <li id="sort01" onClick="setSort('01');" class="sel">정확도순</li>
+              <li id="sort02" onClick="setSort('02');">최신순</li>
             </ul>
           </div>
         </div>
@@ -416,23 +422,23 @@ $(document).ready(function() {
           <div class='ss_tit'>기간검색</div>
           <div class='cont'>
             <ul>
-              <li>전체</li>
-              <li>1일</li>
+              <li id="date01" onClick="setDate('01');" class="sel">전체</li>
+              <li id="date02" onClick="setDate('02');">1일</li>
             </ul>
             <ul>
-              <li class="sel">1주</li>
-              <li>1개월</li>
+              <li id="date03" onClick="setDate('03');">1주</li>
+              <li id="date04" onClick="setDate('04');">1개월</li>
             </ul>
             <ul>
-              <li>1년</li>
-              <li>직접입력</li>
+              <li id="date05" onClick="setDate('05');">1년</li>
+              <li id="date06" onClick="setDate('06');">직접입력</li>
             </ul>
           </div>
           <div class="set_time_box">
             <ul>
-              <input class="sort_from">
+              <input class="sort_from" id="startDate" onClick="openDatepicker(this);" autocomplete="off">
               <li class="s_wave">~</li>
-              <input class="sort_to">
+              <input class="sort_to" id="endDate" onClick="openDatepicker(this);" autocomplete="off">
               <li class="set_time_btn">적용</li>
             </ul>
           </div>
@@ -442,16 +448,16 @@ $(document).ready(function() {
           <div class='ss_tit'>검색영역</div>
           <div class='cont'>
             <ul>
-              <li>전체</li>
-              <li class="sel">제목</li>
+              <li id="field01" onClick="setField('01');" class="sel">전체</li>
+              <li id="field02" onClick="setField('02');">제목</li>
             </ul>
             <ul>
-              <li>내용</li>
-              <li>첨부내용</li>
+              <li id="field03" onClick="setField('03');">내용</li>
+              <li id="field04" onClick="setField('04');">첨부내용</li>
             </ul>
             <ul>
-              <li>첨부파일명</li>
-              <li>작성자</li>
+              <li id="field05" onClick="setField('05');">첨부파일명</li>
+              <li id="field06" onClick="setField('06');">작성자</li>
             </ul>
           </div>
         </div>
@@ -460,45 +466,45 @@ $(document).ready(function() {
           <div class="sort_box ss_tit">문서종류</div>
           <div class="type_box">
             <div class="type_div">
-              <span class="filetype_chk"><input type='checkbox' /></span>
+              <span class="filetype_chk"><input id='fileAll' type='checkbox' value='all'/></span>
               <img class='filetype_img' src="./images/search.png" alt="searchAll_icon">
               <span class="filetype_name">전체</span>
             </div>
             <div class="type_div">
-              <span class="filetype_chk"><input type='checkbox' /></span>
+              <span class="filetype_chk"><input id='file01' type='checkbox' value='pdf'/></span>
               <img class='filetype_img' src="./images/pdf.png" alt="pdf_icon">
               <span class="filetype_name">PDF</span>
             </div>
             <div class="type_div">
-              <span class="filetype_chk"><input type='checkbox' /></span>
+              <span class="filetype_chk"><input id='file02' type='checkbox' value='xls'/></span>
               <img class='filetype_img' src="./images/xls.png" alt="xls_icon">
               <span class="filetype_name">XLS</span>
             </div>
             <div class="type_div">
-              <span class="filetype_chk"><input type='checkbox' /></span>
+              <span class="filetype_chk"><input id='file03' type='checkbox' value='doc'/></span>
               <img class='filetype_img' src="./images/doc.png" alt="doc_icon">
               <span class="filetype_name">DOC</span>
             </div>
             <div class="type_div">
-              <span class="filetype_chk"><input type='checkbox' /></span>
+              <span class="filetype_chk"><input id='file04' type='checkbox' value='ppt'/></span>
               <img class='filetype_img' src="./images/ppt.png" alt="ppt_icon">
               <span class="filetype_name">PPT</span>
             </div>
             <div class="type_div">
-              <span class="filetype_chk"><input type='checkbox' /></span>
+              <span class="filetype_chk"><input id='file05' type='checkbox' value='jpg'/></span>
               <img class='filetype_img' src="./images/jpeg.png" alt="jpg_icon">
               <span class="filetype_name">JPG</span>
             </div>
             <div class="type_div">
-              <span class="filetype_chk"><input type='checkbox' /></span>
+              <span class="filetype_chk"><input id='file06' type='checkbox' value='txt'/></span>
               <img class='filetype_img' src="./images/txt.png" alt="txt_icon">
               <span class="filetype_name">TXT</span>
             </div>
           </div>
           <div class='cont'>
             <ul>
-              <li class="sel">적용</li>
-              <li>초기화</li>
+              <li id="setFile" onClick="setFile();" class="sel">적용</li>
+              <li id="resetFile" onClick="resetFile();">초기화</li>
             </ul>
           </div>
         </div>
