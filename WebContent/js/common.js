@@ -132,6 +132,28 @@ function popularSearch() {
 	
 }
 
+// 자동완성 호출
+function getQuickAutoQuery(keyword) {
+	let sort = "keyword"; //keyword:키워드오름차순 정렬, weight:가중치 내림차순 정렬 .
+	let size = "5";
+	
+	let url = setConfig.autocompleteUrl + "?keyword=" + keyword + "&size=" + size + "&sort=" + sort;
+	let result = JSON.parse(ajaxJsonCommon(url));
+	$('.search_auto_content').empty();
+	if (result !== undefined) {
+		if (result.length > 0) {
+			let html = '<ul>';
+			for(let i in result) {
+				html += "<li><p onclick='wordClick(\""+result[i].keyword+"\")' style='cursor: pointer;'>" + highlightChange(result[i].highlight) + "</p></li>";
+			}
+			html += "</ul>";
+			$('.search_auto_content').html(html);
+			
+		}
+	}
+	
+}
+
 // 검색어 클릭 함수
 function wordClick(keyword) {
 	console.log('워드클릭 : ' + keyword);
@@ -158,7 +180,6 @@ function ajaxJsonCommon(url) {
         dataType: "json",
         success: function(result) {
         	let resultJson = JSON.stringify(result);
-        	console.log('ajax 결과 : ' + resultJson);
         	rResult = resultJson;
         },
         error: function(e) {
