@@ -18,6 +18,7 @@
   <script type="text/javascript" src="./js/ref/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="./js/ref/moment-2.13.min.js"></script>
   <script type="text/javascript" src="./js/common.js"></script>
+  <script type="text/javascript" src="./js/config/index.js"></script>
   <script type="text/javascript" src="./js/result/results.js"></script>
   <script src="./datepicker/jquery-1.12.4.js"></script>
   <script src="./datepicker/jquery-ui.js"></script>
@@ -40,6 +41,8 @@ $(document).ready(function() {
 <input type="hidden" id="sort" value="01">
 <input type="hidden" id="field" value="01">
 <input type="hidden" id="file" value="all">
+<input type="hidden" id="keyword" value="">
+<input type="hidden" id="rekeyword" value="">
 
   <div class="v_head">
     <div class="head_middle">
@@ -51,13 +54,13 @@ $(document).ready(function() {
         </div>
         <div class="search_auto_div">
           <div class="search_auto_content">
-            <ul>
+            <!-- <ul>
               <li><em>폴리에스</em>터</li>
               <li><em>폴리에스</em>테르</li>
               <li><em>폴리에스</em>터 100%</li>
               <li><em>폴리에스</em>터 원단</li>
               <li><em>폴리에스</em>터 섬유</li>
-            </ul>
+            </ul> -->
           </div>
           <div class="search_auto_info">
             <ul>
@@ -73,7 +76,7 @@ $(document).ready(function() {
         </div>
       </div>
       <div class="search_again">
-        <span class="check_box"><input type='checkbox' /></span>
+        <span class="check_box"><input type='checkbox' id="requery"/></span>
         <span class="check_box_txt">결과내 재검색</span>
       </div>
       <div class="search_help">

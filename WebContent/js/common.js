@@ -55,7 +55,6 @@ $(document).ready(function() {
        $('.modal.dark_layer').show();
     });
     
-    
     // 검색조건 - 문서종류 (전체 혹은 개별 문서종류 선택) 
     $('#fileAll').click(function(){
     	if ( $('#fileAll').is(':checked') ){
@@ -76,14 +75,103 @@ $(document).ready(function() {
     	});
 	}
     
+    // 결과내 재검색 체크박스 선택여부
+    $('#requery').change(function() {
+    	if ($('#requery').is(':checked')) { // 체크되어있으면  input text 삭제 및 커서 포커스
+    		$('.search_input').val('');
+    		$('.search_input').focus();
+    	}
+    	else {
+    		$('#rekeyword').val('');
+    	}
+    });
+    
+    // 자동완성 호출
+    $(".search_input").keyup(function (e) {
+        var keyword = $(this).val();
+        if (keyword) {
+        	getQuickAutoQuery(keyword);
+        	$('.search_auto_div').show();
+        }
+        else {
+        	$('.search_auto_div').hide();
+        }
+    });
+    
+    // 검색어 입력창 클릭 이벤트
+    $(".search_input").click(function () {
+    	let keyword = $('.search_input').val();
+    	if (keyword) {
+    		getQuickAutoQuery(keyword);
+    		$('.search_auto_div').show();
+    	}
+    });
+    
+    // 인기검색어 hover 이벤트
+    $('.popular_prev_div').mouseenter(function() {
+    	$('.popular_box').show();
+    });
+    $('.popular_prev_div').mouseleave(function() {
+    	$('.popular_box').hide();
+    });
+    
+    // 인기검색어
+    popularSearch();
     
 });
 
+// 인기검색어
+function popularSearch() {
+	let label = "search";
+	let url = setConfig.popularUrl + "?label=" + label;
+//	"http://210.91.70.170:19201/service/popquery?label=" + label;
+
+
+	let result = JSON.parse(ajaxJsonCommon(url));
+	console.log('인기검색어 : ' + JSON.stringify(result));
+	
+}
+
+// 검색어 클릭 함수
+function wordClick(keyword) {
+	console.log('워드클릭 : ' + keyword);
+	$('.search_input').val(keyword);
+	$('.search_auto_div').hide();
+	search();
+}
+
+// 검색어 하이라이트 기호 <em> 태그 변경
+function highlightChange(str) {
+	if(str == "" ) return "";
+    let rename = str.replace("¶HS¶","<em>");
+    rename =  rename.replace("¶HE¶","</em>");
+    return rename;
+}
+
+// 공통 - ajax function
+function ajaxJsonCommon(url) {
+	let rResult; // ajax 내에서 rResult 선언하지 않고 return 하면 undefined 됨
+	$.ajax({
+        url: url, // 요청 할 주소
+        async: false, // false 일 경우 동기 요청으로 변경
+        type: 'GET', // GET, PUT
+        dataType: "json",
+        success: function(result) {
+        	let resultJson = JSON.stringify(result);
+        	console.log('ajax 결과 : ' + resultJson);
+        	rResult = resultJson;
+        },
+        error: function(e) {
+            console.log(e);
+         }
+	});
+	
+	return rResult;
+}
 
 // 현재 카테고리 선택
 function setCollection(coll) {
-	// 이전결재문서, 파일 탭은 사용자의 권한에 따라 보일 수도 안보일 수도 있음
-	// 총 탭 10개
+	// TODO: 이전결재문서, 파일 탭은 사용자의 권한에 따라 보일 수도 안보일 수도 있음(총 탭 10개)
 	// 컬렉션 버튼 이미지 초기화
 	for (i = 1;i < 9 ;i++) {
 		$('#collection0' + i).parent().attr('class','menu_btn');
@@ -129,10 +217,19 @@ function setCollection(coll) {
 }
 
 // 검색
-function search() { 
+function search() {
 	
 	// 검색어 가져오기
-   var keyword = $('.search_input').val().replace(/ /g, '');
+   let keyword = $('.search_input').val().replace(/ /g, '');
+   
+   // 결과내 재검색 체크박스 선택여부
+   if ($('#requery').is(':checked') == true) { // 결과내 재검색일 때
+	   $('#rekeyword').val(keyword);
+	   keyword = $('#keyword').val() + " +" + keyword;
+   }
+   else { 
+	   $('#keyword').val(keyword); // 검색어 hidden에 저장
+   }
    
    // 검색어 없을 때 검색 사용방법 화면 이동
    if (!keyword) {
