@@ -124,12 +124,45 @@ $(document).ready(function() {
 function popularSearch() {
 	let label = "search";
 	let url = setConfig.popularUrl + "?label=" + label;
-//	"http://210.91.70.170:19201/service/popquery?label=" + label;
-
 
 	let result = JSON.parse(ajaxJsonCommon(url));
-	console.log('인기검색어 : ' + JSON.stringify(result));
-	
+	if (result !== undefined) {
+		let html = '';
+		for (let i in result) {
+			if (i == 0) {
+				if (result[i].updown == 'up' || result[i].updown == 'new') {
+					$('.popular_prev_text').html(result[0].query + '<span class="popular_arrow ion-android-arrow-dropup-circle"></span>');
+				}
+				else if (result[i].updown == 'stay') {
+					$('.popular_prev_text').html(result[0].query + '<span class="popular_arrow ion-android-remove-circle"></span>');
+				}
+				else if (result[i].updown == 'down') {
+					$('.popular_prev_text').html(result[0].query + '<span class="popular_arrow ion-android-arrow-dropdown-circle"></span>');
+				}
+			}
+			
+			html += '<ul>'
+				+  '<li class="pop_num">' + result[i].rank + '</li>'
+				+ '<li class="pop_name" onclick="wordClick(\'' + result[i].query + '\')" style="cursor: pointer;">' + result[i].query + '</li>';
+			if (result[i].updown == 'up') {
+				html += '<li class="pop_arrow up ion-android-arrow-dropup-circle"></li>'
+					+ '<li class="pop_updown"> +' + result[i].diff + '</li></ul>';
+			}
+			if (result[i].updown == 'new') {
+				html += '<li class="pop_arrow up ion-android-arrow-dropup-circle"></li>'
+					+ '<li class="pop_updown">new</li></ul>';
+			}
+			else if (result[i].updown == 'stay') {
+				html += '<li class="pop_arrow nochange ion-android-remove-circle"></li>'
+				+ '<li class="pop_updown">' + result[i].diff + '</li></ul>';
+			}
+			else if (result[i].updown == 'down') {
+				html += '<li class="pop_arrow down ion-android-arrow-dropdown-circle"></li>'
+				+ '<li class="pop_updown">' + result[i].diff + '</li></ul>';
+			}
+		} // for END
+		$('.popular_div').html(html);
+	}
 }
 
 // 자동완성 호출
@@ -143,12 +176,11 @@ function getQuickAutoQuery(keyword) {
 	if (result !== undefined) {
 		if (result.length > 0) {
 			let html = '<ul>';
-			for(let i in result) {
+			for (let i in result) {
 				html += "<li><p onclick='wordClick(\""+result[i].keyword+"\")' style='cursor: pointer;'>" + highlightChange(result[i].highlight) + "</p></li>";
 			}
 			html += "</ul>";
 			$('.search_auto_content').html(html);
-			
 		}
 	}
 	
@@ -156,7 +188,6 @@ function getQuickAutoQuery(keyword) {
 
 // 검색어 클릭 함수
 function wordClick(keyword) {
-	console.log('워드클릭 : ' + keyword);
 	$('.search_input').val(keyword);
 	$('.search_auto_div').hide();
 	search();
@@ -353,7 +384,7 @@ function setDate(num){
 			break;
 		case '02':
 			startDate = getAddDay(currentDate, -0); // 1일 
-			console.log(startDate);
+			// console.log(startDate);
 			$('#date02').attr('class',cnhClass);
 			
 			break;
