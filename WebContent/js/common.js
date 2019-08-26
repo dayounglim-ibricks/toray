@@ -1,5 +1,8 @@
 //JavaScript Document
 $(document).ready(function() {
+	
+	// 권한확인
+	
    
 	// datepicker
     $("#startDate").datepicker({
@@ -141,7 +144,7 @@ function popularSearch() {
 				}
 			}
 			
-			html += '<ul>'
+			html += '<ul>' 
 				+  '<li class="pop_num">' + result[i].rank + '</li>'
 				+ '<li class="pop_name" onclick="wordClick(\'' + result[i].query + '\')" style="cursor: pointer;">' + result[i].query + '</li>';
 			if (result[i].updown == 'up') {

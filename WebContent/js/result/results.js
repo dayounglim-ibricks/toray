@@ -290,7 +290,7 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
 
 // 시큐어디스크
 function resultSecuredisk(keyword, from, size) {   //현재페이지, 출력 데이터 수
-   const index = "securedisk";
+   const index = "v1-securedisk-search";
    let data = getTerms(index, keyword, from, size);	
    let result = JSON.parse(ajaxJson(data));
    
@@ -396,7 +396,7 @@ function resultApp(keyword, from, size) {   //현재페이지, 출력 데이터 
 
 // 이전결재문서
 function resultAppoId(keyword, from, size) {   //현재페이지, 출력 데이터 수
-   const index = "appold";
+   const index = "appold*";
    let data = getTerms(index, keyword, from, size);
    let result = JSON.parse(ajaxJson(data));
    
@@ -447,7 +447,7 @@ function resultAppoId(keyword, from, size) {   //현재페이지, 출력 데이�
 
 // ISO
 function resultIso(keyword, from, size) {   //현재페이지, 출력 데이터 수
-   const index = "iso";
+   const index = "v1-iso-search";
    let data = getTerms(index, keyword, from, size);
    let result = JSON.parse(ajaxJson(data));
        	
@@ -500,7 +500,7 @@ function resultIso(keyword, from, size) {   //현재페이지, 출력 데이터 
 
 // 분임조(grp)
 function resultGrp(keyword, from, size) {   //현재페이지, 출력 데이터 수
-   const index = "grp";
+   const index = "v1-sug-search";
    let data = getTerms(index, keyword, from, size);
    let result = JSON.parse(ajaxJson(data));
         	
@@ -554,7 +554,7 @@ function resultGrp(keyword, from, size) {   //현재페이지, 출력 데이터 
 
 // 제안(sug)
 function resultSug(keyword, from, size) {   //현재페이지, 출력 데이터 수
-   const index = "sug";
+   const index = "v1-sug-search";
    let data = getTerms(index, keyword, from, size);
    let result = JSON.parse(ajaxJson(data));
         	
@@ -606,7 +606,7 @@ function resultSug(keyword, from, size) {   //현재페이지, 출력 데이터 
 
 // 파일
 function resultFile(keyword, from, size) {   //현재페이지, 출력 데이터 수
-   const index = "file";
+   const index = "v1-file-search";
    let data = getTerms(index, keyword, from, size);
    let result = JSON.parse(ajaxJson(data));
         	

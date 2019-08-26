@@ -114,7 +114,7 @@ $(document).ready(function() {
           <div class="popular_title">인기검색어</div>
           <!--[if IE]> <div class="popular_div" style="top: -40px; right:754px"> <![endif]-->
           <div class="popular_div">
-            <ul>
+            <!-- <ul>
               <li class="pop_num">1</li>
               <li class="pop_name">폴리에스터</li>
               <li class="pop_arrow up ion-android-arrow-dropup-circle"></li>
@@ -173,7 +173,7 @@ $(document).ready(function() {
               <li class="pop_name">합성</li>
               <li class="pop_arrow up ion-android-arrow-dropup-circle"></li>
               <li class="pop_updown">+1</li>
-            </ul>
+            </ul> -->
           </div>
         </div>
       </div>
