@@ -1,8 +1,7 @@
 //JavaScript Document
 $(document).ready(function() {
 	
-	// 권한확인
-	
+	// 권한확인	
    
 	// datepicker
     $("#startDate").datepicker({
@@ -19,7 +18,7 @@ $(document).ready(function() {
         onClose: function( selectedDate ) {
         	$("#endDt").datepicker("option", "minDate", selectedDate );
         }
-    });
+    }); 
 	$("#endDate").datepicker({
         dateFormat: 'yy.mm.dd',
         monthNames: [ "01","02","03","04","05","06","07","08","09","10","11","12" ],
@@ -238,7 +237,7 @@ function setCollection(coll) {
 	if (coll == "01") { // 통합검색 
 		$('#collection01').parent().attr('class',cnhClass);
 		$("#collection").val(coll);
-		
+		$('.paging_div').hide(); // 페이징 숨김
 	} else if (coll == '02') { // 시큐어디스크 
 		$('#collection02').parent().attr('class',cnhClass);
 		$("#collection").val(coll);
@@ -246,11 +245,11 @@ function setCollection(coll) {
 	} else if (coll == '03') { // 전자결재 
 		$('#collection03').parent().attr('class',cnhClass);
 		$("#collection").val(coll);
-		
+
 	} else if (coll == '04') { // ISO
 		$('#collection04').parent().attr('class',cnhClass);
 		$("#collection").val(coll);
-		
+
 	} else if (coll == '05') { // 분임조 
 		$('#collection05').parent().attr('class',cnhClass);
 		$("#collection").val(coll);

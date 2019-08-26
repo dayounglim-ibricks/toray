@@ -20,7 +20,7 @@ function getTerms(index, keyword, from, size){
 function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 수
 	const index = "all";
 	let data = getTerms(index, keyword, from, size);
-
+	
 	$('.content_div.result .doc_div').remove();
   
 	// -------------------------------------------------------
@@ -41,7 +41,7 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
   
 	let allTotal = 0;
 	let print = '';
-  
+
 	let result = JSON.parse(ajaxJson(data));
 	// console.log('성공 : ' + JSON.stringify(result));
 	for(let i in result) {
@@ -85,7 +85,9 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
 		item.forEach(function(val, idx){
 			if(idx === 0){
 				print += `<div class="result_type_div">
-					<div class="type_txt">${index}(${securedisk_total})</div>
+					<div class="type_txt">${index}(${securedisk_total})
+						<div style="float:right; cursor:pointer;" onClick="javascript:setCollection('02');">+ 더보기</div>
+					</div>
 					</div>`;
 			}
 			print += `<div class="doc_box">
@@ -115,7 +117,9 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
 		item.forEach(function(val, idx){
 			if(idx === 0){
 				print += `<div class="result_type_div">
-				  <div class="type_txt">${index}(${app_total})</div>
+				  <div class="type_txt">${index}(${app_total})
+					<div style="float:right; cursor:pointer;" onClick="javascript:setCollection('03');">+ 더보기</div>
+				  </div>
 				  </div>
 				  `;
 			}
@@ -142,7 +146,9 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
     	item.forEach(function(val, idx){
     		if(idx === 0){
     			print += `<div class="result_type_div">
-    				<div class="type_txt">${index}(${appold_total})</div>
+    				<div class="type_txt">${index}(${appold_total})
+    					<div style="float:right; cursor:pointer;" onClick="javascript:setCollection('07');">+ 더보기</div>
+    				</div>
     				</div>`;
     		}
     		print += `<div class="doc_box">
@@ -168,7 +174,9 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
     	item.forEach(function(val, idx){
     		if(idx === 0){
     			print += `<div class="result_type_div">
-    				<div class="type_txt">${index}(${iso_total})</div>
+    				<div class="type_txt">${index}(${iso_total})
+    					<div style="float:right; cursor:pointer;" onClick="javascript:setCollection('04');">+ 더보기</div>
+    				</div>
     				</div>`;
     		}
     		print += `<div class="doc_box">
@@ -196,8 +204,10 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
     	item.forEach(function(val, idx){
     		if(idx === 0){
     			print += `<div class="result_type_div">
-    				<div class="type_txt">${index}(${grp_total})</div>
-    			</div>`;
+    				<div class="type_txt">${index}(${grp_total})
+    					<div style="float:right; cursor:pointer;" onClick="javascript:setCollection('05');">+ 더보기</div>
+    				</div>
+    				</div>`;
     		}
     		print += `<div class="doc_box">
     			<div class="doc_title">${val.subject}</div>
@@ -225,7 +235,9 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
     	item.forEach(function(val, idx){
     		if(idx === 0){
     			print += `<div class="result_type_div">
-    				<div class="type_txt">${index}(${sug_total})</div>
+    				<div class="type_txt">${index}(${sug_total})
+    					<div style="float:right; cursor:pointer;" onClick="javascript:setCollection('06');">+ 더보기</div>
+    				</div>
     				</div>`;
     		}
     		print += `<div class="doc_box">
@@ -252,7 +264,9 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
     	item.forEach(function(val, idx){
     		if(idx === 0){
     			print += `<div class="result_type_div">
-    				<div class="type_txt">${index}(${file_total})</div>
+    				<div class="type_txt">${index}(${file_total})
+    					<div style="float:right; cursor:pointer;" onClick="javascript:setCollection('08');">+ 더보기</div>
+    				</div>
     				</div>`;
     		}
     		print += `<div class="doc_box">
@@ -285,13 +299,13 @@ function resultAll(keyword, from, size) {	//현재페이지, 출력 데이터 �
  
     // print result 
     $(".result_div").after(print);
-    $(".paging_div").show();	
 }
 
 // 시큐어디스크
 function resultSecuredisk(keyword, from, size) {   //현재페이지, 출력 데이터 수
    const index = "v1-securedisk-search";
    let data = getTerms(index, keyword, from, size);	
+   
    let result = JSON.parse(ajaxJson(data));
    
    $('.content_div.result .doc_div').remove();
@@ -659,7 +673,7 @@ function resultFile(keyword, from, size) {   //현재페이지, 출력 데이터
 function ajaxJson(data) {
 	let rResult; // ajax 내에서 rResult 선언하지 않고 return 하면 undefined 됨
 	let url = setConfig.elasticUrl;
-	 
+
 	$.ajax({
         url: url, // 요청 할 주소
         async: false, // false 일 경우 동기 요청으로 변경
@@ -669,6 +683,8 @@ function ajaxJson(data) {
         success: function(result) {
         	let resultJson = JSON.stringify(result);
         	rResult = resultJson;
+        	
+        	$('.search_auto_div').hide();
         },
         error: function(e) {
             console.log(e);

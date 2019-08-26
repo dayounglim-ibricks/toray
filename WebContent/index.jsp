@@ -15,13 +15,15 @@
   <meta property="og:description" content="도레이">
   <link rel='stylesheet' type='text/css' href='./css/ionicons.css'>
   <link rel="stylesheet" type='text/css' href="./css/main.css">
-  <script type="text/javascript" src="./js/ref/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/simplePagination.css"/>
+  <!-- <script type="text/javascript" src="./js/ref/jquery-3.2.1.min.js"></script> -->
   <script type="text/javascript" src="./js/ref/moment-2.13.min.js"></script>
+  <script src="./datepicker/jquery-1.12.4.js"></script>
+  <script src="./datepicker/jquery-ui.js"></script>
   <script type="text/javascript" src="./js/common.js"></script>
   <script type="text/javascript" src="./js/config/index.js"></script>
   <script type="text/javascript" src="./js/result/results.js"></script>
-  <script src="./datepicker/jquery-1.12.4.js"></script>
-  <script src="./datepicker/jquery-ui.js"></script>
+  <script type="text/javascript" src="./js/ref/jquery.simplePagination.js"></script>
   <link rel="stylesheet" href="./datepicker/jquery-ui.css">
 </head>
 <script>
@@ -32,6 +34,13 @@ $(document).ready(function() {
       $('.content_div.result').hide();
       $('.content_div.non_result').show();
    }
+   
+   // 페이징 처리
+   $("#paging").pagination({
+       items: 100,
+       itemsOnPage: 10,
+       cssStyle: 'light-theme',
+   });
 });
 </script>
 <body>
@@ -89,7 +98,7 @@ $(document).ready(function() {
   </div>
   <div class="v_menu">
     <div class="menu_box">
-      <div class="selected_menu_btn"><a href="#" name ="collection01" id="collection01" onClick="javascript:setCollection('01');" >통합검색</a></div>
+      <div class="selected_menu_btn" id="collection01_div"><a href="#" name ="collection01" id="collection01" onClick="javascript:setCollection('01');" >통합검색</a></div>
       <div class="menu_btn"><a href="#" name ="collection02" id="collection02" onClick="javascript:setCollection('02');" >시큐어디스크</a></div>
       <div class="menu_btn"><a href="#" name ="collection03" id="collection03" onClick="javascript:setCollection('03');" >전자결재</a></div>
       <div class="menu_btn"><a href="#" name ="collection03" id="collection07" onClick="javascript:setCollection('07');" >이전결재문서</a></div>
@@ -339,10 +348,9 @@ $(document).ready(function() {
           </div>
         </div> -->
         
-        
-
-        <div class="paging_div" style="display: none;">
-          <span class="p_elem paging_bbefore">
+        <!-- <div id="paging" class="paging_div" style="display: none;"> -->
+        <div id="paging" class="paging_div">
+          <!-- <span class="p_elem paging_bbefore">
             <span class="ion-android-arrow-dropleft"></span><em>10</em>
           </span>
           <span class="p_elem paging_before ion-android-arrow-dropleft"></span>
@@ -354,7 +362,7 @@ $(document).ready(function() {
           <span class="p_elem paging_next ion-android-arrow-dropright"></span>
           <span class="p_elem paging_nnext">
             <em>10</em><span class="ion-android-arrow-dropright"></span>
-          </span>
+          </span> -->
         </div>
         
  
